@@ -1,0 +1,21 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  fbb:
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Description: 'ping-pong'
+    ping:
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Handler: index.handler
+        CodeUri: './'
+        Description: 'http trigger demo with nodejs8!'
+        Runtime: nodejs8
+      Events:
+        http:
+          Type: HTTP
+          Properties:
+            AuthType: ANONYMOUS
+            Methods: ['GET']
+
