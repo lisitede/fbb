@@ -5,17 +5,16 @@ Resources:
     Type: 'Aliyun::Serverless::Service'
     Properties:
       Description: 'fbb'
-    ping:
+    rsa:
       Type: 'Aliyun::Serverless::Function'
       Properties:
+        Description: 'RSA keypair generator'
         Handler: index.handler
-        CodeUri: './'
-        Description: 'ping-pong'
+        CodeUri: './dist'
         Runtime: nodejs8
       Events:
         http:
           Type: HTTP
           Properties:
             AuthType: ANONYMOUS
-            Methods: ['GET']
-
+            Methods: ['POST']
