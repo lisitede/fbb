@@ -1,0 +1,26 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  fbb:
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Description: 'fbb'
+      Policies:
+          - AliyunECSNetworkInterfaceManagementAccess
+      VpcConfig:
+        VpcId: 'vpc-bp1bwcu3v4i7uba2od8dy'
+        VSwitchIds: ['vsw-bp1pwxecubh3icxo083eu'] # prod, cn-hangzhou-g
+        SecurityGroupId: 'sg-bp1j550xmzquo0wbc4vp' # fc
+    keys:
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Description: 'RSA keypair generator'
+        Handler: index.handler
+        CodeUri: './dist'
+        Runtime: nodejs8
+      Events:
+        http:
+          Type: HTTP
+          Properties:
+            AuthType: ANONYMOUS
+            Methods: ['GET']
