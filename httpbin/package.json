@@ -1,0 +1,21 @@
+{
+  "name": "httpbin",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@midwayjs/egg": "1.2.0",
+    "@midwayjs/faas": "1.2.15",
+    "egg-view-nunjucks": "2.2.0"
+  },
+  "devDependencies": {
+    "@midwayjs/fcli-plugin-fc": "1.2.20",
+    "@midwayjs/serverless-invoke": "1.2.12",
+    "@types/mocha": "5.2.5"
+  },
+  "scripts": {
+    "build": "f package --skipZip",
+    "test": "f test",
+    "start": "f invoke -p",
+    "debug": "f invoke -p --debug"
+  }
+}

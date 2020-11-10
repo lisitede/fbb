@@ -1,0 +1,54 @@
+service: sakiel
+
+provider:
+  name: aliyun
+  runtime: nodejs12
+  vpcConfig:
+    vpcId: vpc-bp1bwcu3v4i7uba2od8dy
+    vSwitchIds:
+      - vsw-bp1s4tsf9v0c4ni76lsys
+    securityGroupId: sg-bp165858i0klv9oh9chj
+  policies:
+    - AliyunECSNetworkInterfaceManagementAccess
+    - AliyunVPCReadOnlyAccess
+
+functions:
+  public:
+    handler: view.public
+    events:
+      - http:
+          path: /public/*
+          method: get  
+  home:
+    handler: view.home
+    events:
+      - http:
+          method: get
+          path: /home
+  ping:
+    handler: api.ping
+    events:
+      - http:
+          method: get
+          path: /ping
+  get:
+    handler: api.get
+    events:
+      - http:
+          method: get
+          path: /get
+  curl:
+    handler: api.curl
+    events:
+      - http:
+          method: get
+          path: /curl
+
+package:
+  # include:
+  #   - public
+  artifact: code.zip
+
+custom:
+  customDomain:
+    domainName: sakiel.f.lisitede.com
