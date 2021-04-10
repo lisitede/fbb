@@ -1,0 +1,32 @@
+service:
+  name: fbb
+
+provider:
+  name: aliyun
+  logConfig:
+    project: lisitede
+    logstore: fbb-httpbin
+
+deployType: egg
+
+functions:
+  httpbin-index:
+    runtime: nodejs12
+    handler: index.handler
+    events:
+      - http:
+          path: /
+    environment:
+      FORCE_COLOR: 0
+
+  httpbin:
+    runtime: nodejs12
+    handler: index.handler
+    events:
+      - http:
+          path: /httpbin/*
+    environment:
+      FORCE_COLOR: 0
+
+package:
+  artifact: code.zip
